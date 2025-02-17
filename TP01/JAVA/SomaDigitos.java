@@ -251,33 +251,31 @@ class MyIO {
    }
 }
 /**
- * A classe Palindromo verifica se uma palavra é um palindromo.
- * Um palindromo é uma palavra que pode ser lida da mesma forma de trás pra frente.
- * O programa lê entradas usando a classe MyIO e imprime "SIM" quando verdadeiro e "NAO" quando falso.
- * O programa finaliza quando é digitado "FIM".
+ * A classe SomaDigitos contém um método recursivo para calcular a soma dos digitos de um número.
+ * O caso base, ou seja, a condição de parada é quando o número é igual a 0.
+ * O método principal inicializa o contador e chama o método recursivo.
  */
-class Palindromo 
+class SomaDigitos 
 {
-    public static void main (String[] args){
-        String palavra;
-        do{
-            palavra = MyIO.readLine();
-            if (palavra.equals("FIM")) break;
-            boolean ehPalindromo = true;
-            int tamanho = palavra.length();
-            for(int i = 0; i < tamanho / 2; i++)
-            {
-                if(palavra.charAt(i) != palavra.charAt(tamanho - 1 - i))
-                {
-                    ehPalindromo = false;
-                    i = tamanho;
-                }
-            }
-            if(ehPalindromo)
-            {
-                MyIO.println("SIM");
-            }
-            else MyIO.println("NAO");
-        } while(!palavra.equals("FIM"));
+  public static int somaDigitos(int num)
+  {
+    return somaDigitos(num, 0);
+  }
+
+  public static int somaDigitos(int num, int soma)
+  {
+    if(num == 0) // caso base, quando n for 0
+    {
+      return soma;
     }
+    return somaDigitos(num / 10, soma + (num % 10));
+  }
+  public static void main (String[] args){
+    int numero;
+    do{
+    numero = MyIO.readInt();
+    MyIO.println(somaDigitos(numero));
+    }while(numero != 0);
 }
+}
+

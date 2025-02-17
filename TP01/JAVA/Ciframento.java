@@ -251,33 +251,23 @@ class MyIO {
    }
 }
 /**
- * A classe Palindromo verifica se uma palavra é um palindromo.
- * Um palindromo é uma palavra que pode ser lida da mesma forma de trás pra frente.
- * O programa lê entradas usando a classe MyIO e imprime "SIM" quando verdadeiro e "NAO" quando falso.
+ * A classe Ciframento escreve uma mensagem criptografada.
+ * Lê palavras da entrada padrão usando a classe MyIO, aplica um ciframento de César ou seja +3 na tabela ASCII.
  * O programa finaliza quando é digitado "FIM".
  */
-class Palindromo 
+class Ciframento 
 {
-    public static void main (String[] args){
+        public static void main (String[] args){
         String palavra;
         do{
             palavra = MyIO.readLine();
-            if (palavra.equals("FIM")) break;
-            boolean ehPalindromo = true;
-            int tamanho = palavra.length();
-            for(int i = 0; i < tamanho / 2; i++)
-            {
-                if(palavra.charAt(i) != palavra.charAt(tamanho - 1 - i))
-                {
-                    ehPalindromo = false;
-                    i = tamanho;
-                }
-            }
-            if(ehPalindromo)
-            {
-                MyIO.println("SIM");
-            }
-            else MyIO.println("NAO");
+        if(palavra.equals("FIM")) break;
+        StringBuilder cifrada = new StringBuilder();
+        int tamanho = palavra.length();
+        for(int i = 0; i < tamanho; i++){
+            cifrada.append((char) (palavra.charAt(i) + 3));
+        }
+        MyIO.println(cifrada.toString());
         } while(!palavra.equals("FIM"));
-    }
+}
 }

@@ -251,33 +251,39 @@ class MyIO {
    }
 }
 /**
- * A classe Palindromo verifica se uma palavra é um palindromo.
- * Um palindromo é uma palavra que pode ser lida da mesma forma de trás pra frente.
- * O programa lê entradas usando a classe MyIO e imprime "SIM" quando verdadeiro e "NAO" quando falso.
+ * A classe InversaoString escreve uma string de forma inversa.
+ * Lê palavras da entrada padrão usando a classe MyIO e imprime suas versões invertidas.
+ * Métodos:
+ * swap: Troca dois caracteres de posição em um array de caracteres.
+ * inverteString: Inverte a string recebida como entrada.
+ * main: Lê palavras da entrada e imprime suas versões invertidas.
  * O programa finaliza quando é digitado "FIM".
  */
-class Palindromo 
+class InversaoString 
 {
-    public static void main (String[] args){
+        public static void swap(char[] a, int i, int j)
+        {
+            char aux = a[i];
+            a[i] = a[j];
+            a[j] = aux;            
+        }
+        public static String inverteString(String palavra)
+        {
+            char[] caracteres = palavra.toCharArray();
+            for(int i = 0; i < palavra.length() / 2; i++)
+            {
+                swap(caracteres, i, palavra.length() - 1 - i);
+            }
+            return new String(caracteres);
+        }
+
+        public static void main (String[] args){
         String palavra;
         do{
-            palavra = MyIO.readLine();
-            if (palavra.equals("FIM")) break;
-            boolean ehPalindromo = true;
-            int tamanho = palavra.length();
-            for(int i = 0; i < tamanho / 2; i++)
-            {
-                if(palavra.charAt(i) != palavra.charAt(tamanho - 1 - i))
-                {
-                    ehPalindromo = false;
-                    i = tamanho;
-                }
-            }
-            if(ehPalindromo)
-            {
-                MyIO.println("SIM");
-            }
-            else MyIO.println("NAO");
+            palavra = MyIO.readString();
+        if(palavra.equals("FIM")) break;
+        MyIO.println(inverteString(palavra));
+
         } while(!palavra.equals("FIM"));
-    }
+}
 }

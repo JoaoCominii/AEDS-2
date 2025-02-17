@@ -251,33 +251,29 @@ class MyIO {
    }
 }
 /**
- * A classe Palindromo verifica se uma palavra é um palindromo.
- * Um palindromo é uma palavra que pode ser lida da mesma forma de trás pra frente.
- * O programa lê entradas usando a classe MyIO e imprime "SIM" quando verdadeiro e "NAO" quando falso.
+ * A classe ContagemDePalavras conta o numero de palavras em uma frase.
+ * As palavras são separadas por espaços.
  * O programa finaliza quando é digitado "FIM".
  */
-class Palindromo 
+class ContagemDePalavras
 {
-    public static void main (String[] args){
-        String palavra;
-        do{
-            palavra = MyIO.readLine();
-            if (palavra.equals("FIM")) break;
-            boolean ehPalindromo = true;
-            int tamanho = palavra.length();
-            for(int i = 0; i < tamanho / 2; i++)
-            {
-                if(palavra.charAt(i) != palavra.charAt(tamanho - 1 - i))
-                {
-                    ehPalindromo = false;
-                    i = tamanho;
-                }
-            }
-            if(ehPalindromo)
-            {
-                MyIO.println("SIM");
-            }
-            else MyIO.println("NAO");
-        } while(!palavra.equals("FIM"));
+  public static int NumeroDePalavras(String palavra)
+  {
+    if(palavra.isEmpty()) return 0;
+    int contador = 0;
+    for (int i = 0; i < palavra.length(); i++) {
+      if(palavra.charAt(i) == ' ')
+        contador++;   
     }
+    return contador + 1;
+  }
+  public static void main (String[] args){
+  String palavra;
+  do { 
+      palavra = MyIO.readLine();
+      if(palavra.equals("FIM")) break;
+      MyIO.println(NumeroDePalavras(palavra));
+  } while (!palavra.equals("FIM"));
 }
+}
+

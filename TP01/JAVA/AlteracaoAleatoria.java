@@ -1,5 +1,7 @@
 import java.io.*;
 import java.nio.charset.*;
+import java.util.Random;
+
 
 class MyIO {
 
@@ -251,33 +253,31 @@ class MyIO {
    }
 }
 /**
- * A classe Palindromo verifica se uma palavra é um palindromo.
- * Um palindromo é uma palavra que pode ser lida da mesma forma de trás pra frente.
- * O programa lê entradas usando a classe MyIO e imprime "SIM" quando verdadeiro e "NAO" quando falso.
+ * A classe AlteracaoAleatoria substitui todas as ocorrencias da primeira letra na string pela segunda.
+ * Lê palavras da entrada padrão usando a classe MyIO, sorteia duas letras e retorna a string alterada.
  * O programa finaliza quando é digitado "FIM".
  */
-class Palindromo 
+class AlteracaoAleatoria 
 {
-    public static void main (String[] args){
+        public static void main (String[] args){
         String palavra;
+        char letra1, letra2;
+        Random gerador = new Random();
+        gerador.setSeed (4);
         do{
+            letra1 = (char) ('a' + (Math.abs(gerador.nextInt()) % 26));
+            letra2 = (char) ('a' + (Math.abs(gerador.nextInt()) % 26));
+            // MyIO.println("" + letra1 + letra2);
             palavra = MyIO.readLine();
-            if (palavra.equals("FIM")) break;
-            boolean ehPalindromo = true;
-            int tamanho = palavra.length();
-            for(int i = 0; i < tamanho / 2; i++)
+            if(palavra.equals("FIM")) break;
+            StringBuilder novaPalavra = new StringBuilder(palavra);
+            for(int i = 0; i < novaPalavra.length(); i++)
             {
-                if(palavra.charAt(i) != palavra.charAt(tamanho - 1 - i))
-                {
-                    ehPalindromo = false;
-                    i = tamanho;
-                }
+                if(novaPalavra.charAt(i) == letra1)
+                    novaPalavra.setCharAt(i, letra2);
             }
-            if(ehPalindromo)
-            {
-                MyIO.println("SIM");
-            }
-            else MyIO.println("NAO");
-        } while(!palavra.equals("FIM"));
-    }
+        MyIO.println(novaPalavra.toString());
+
+        }while(!palavra.equals("FIM"));
+}
 }
